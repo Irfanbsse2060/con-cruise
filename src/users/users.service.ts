@@ -1,6 +1,7 @@
-import {  NotFoundException, Injectable } from "@nestjs/common";
+import { NotFoundException, BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { EditUserDto, CreateUserDto } from "./dto";
+import { EditUserDto, CreateUserDto, QueryUserDto } from "./dto";
+import { Role } from "@prisma/client";
 
 
 @Injectable()
@@ -8,25 +9,23 @@ export class UsersService {
   constructor(private prisma: PrismaService) {
   }
 
-  async getUserById(id:number)
-  {
+  async getUserById(id: number) {
     return await this.prisma.user.findUnique({
       where: {
         id
-      },
+      }
     });
   }
 
   async deleteUser(id: number) {
-    const user = await this.getUserById(id)
+    const user = await this.getUserById(id);
 
-    // check if user owns the bookmark
     if (!user)
       throw new NotFoundException(
-        'User does not exist'
+        "User does not exist"
       );
 
-     return  await this.prisma.user.delete({
+    return await this.prisma.user.delete({
       where: {
         id
       }
@@ -34,12 +33,17 @@ export class UsersService {
 
   }
 
-  async createUser(user: CreateUserDto) {
-    return await this.prisma.user.create({ data: { ...user } });
+  async createUser(createUserDto: CreateUserDto) {
+    const userInDb = await this.prisma.user.findUnique({ where: { fullName: createUserDto.fullName } });
+    if (userInDb)
+      throw new BadRequestException(
+        "fullName already exists. It should be unique"
+      );
+    return await this.prisma.user.create({ data: { ...createUserDto } });
   }
 
-  async getUsers() {
-    return await this.prisma.user.findMany();
+  async getUsers(queryUserDto?: QueryUserDto) {
+    return await this.prisma.user.findMany({where: {...queryUserDto}});
   }
 
   async editUser(
@@ -47,12 +51,11 @@ export class UsersService {
     dto: EditUserDto
   ) {
 
-    const userInDb = await this.getUserById(id)
+    const userInDb = await this.getUserById(id);
 
-    // check if user owns the bookmark
     if (!userInDb)
       throw new NotFoundException(
-        'User does not exist'
+        "User does not exist"
       );
 
     const user = await this.prisma.user.update({
