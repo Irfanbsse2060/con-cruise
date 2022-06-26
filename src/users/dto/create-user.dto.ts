@@ -1,6 +1,5 @@
 import {
   IsEnum,
-  isEnum,
   IsNumber,
   IsString
 } from "class-validator";
