@@ -20,6 +20,7 @@ $ npm run dev:db:up
 # if you are running app first time application
   Run $ prisma migrate dev #(for dev env). 
   Run $ npx prisma migrate deploy #(for prod env). 
+  create .env file and set environment variable. please check .env.example fie for reference
 
 
   
