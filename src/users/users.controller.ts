@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseEnumPipe,
   ParseIntPipe,
   Patch,
   Post,
@@ -12,8 +11,6 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto, EditUserDto, QueryUserDto } from './dto';
 import { UsersService } from './users.service';
-import { Role } from '@prisma/client';
-import { IsEnum, isEnum } from 'class-validator';
 
 @Controller('users')
 export class UsersController {
