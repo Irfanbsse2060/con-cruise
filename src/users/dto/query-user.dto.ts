@@ -1,7 +1,4 @@
-import {
-  IsOptional,
-  IsEnum
-} from "class-validator";
+import { IsOptional, IsEnum } from 'class-validator';
 import { Role } from '@prisma/client';
 
 export class QueryUserDto {

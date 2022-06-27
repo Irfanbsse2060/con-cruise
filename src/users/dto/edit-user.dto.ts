@@ -1,8 +1,4 @@
-import {
-  IsNumber,
-  IsOptional,
-  IsString
-} from "class-validator";
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { Role } from '@prisma/client';
 export class EditUserDto {
   @IsOptional()

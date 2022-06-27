@@ -18,8 +18,8 @@ model User {
   fullName String @unique
   lat Float
   long Float
-  numberOfRides Float
-  averageRating Float
+  numberOfRides Decimal
+  averageRating Decimal
   role Role @default(CUSTOMER)
 
   @@map("users")

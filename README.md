@@ -13,21 +13,18 @@ $ npm install
 
 ## Running the app
 
+create .env file and set environment variable. please check .env.example file for reference
+
 ```bash
 # Before running app, make sure postgres instance is running 
 $ npm run dev:db:up
 
 # if you are running app first time application
-  Run $ prisma migrate dev #(for dev env). 
-  Run $ npx prisma migrate deploy #(for prod env). 
-  create .env file and set environment variable. please check .env.example fie for reference
+$ prisma migrate dev #(for dev env). 
+$ npx prisma migrate deploy #(for prod env). 
 
-
-  
 # development
 $ npm run start
-
-
 
 # watch mode
 $ npm run start:dev

@@ -1,35 +1,37 @@
 import {
   Body,
-  Controller, Delete,
+  Controller,
+  Delete,
   Get,
-  Param, ParseEnumPipe, ParseIntPipe,
+  Param,
+  ParseEnumPipe,
+  ParseIntPipe,
   Patch,
-  Post, Query
-} from "@nestjs/common";
-import { CreateUserDto, EditUserDto, QueryUserDto } from "./dto";
+  Post,
+  Query,
+} from '@nestjs/common';
+import { CreateUserDto, EditUserDto, QueryUserDto } from './dto';
 import { UsersService } from './users.service';
-import { Role } from "@prisma/client";
-import { IsEnum, isEnum } from "class-validator";
+import { Role } from '@prisma/client';
+import { IsEnum, isEnum } from 'class-validator';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Get()
-  getUsers( @Query() queryUserDto?: QueryUserDto) {
-    return this.userService.getUsers(queryUserDto)
+  getUsers(@Query() queryUserDto?: QueryUserDto) {
+    return this.userService.getUsers(queryUserDto);
   }
 
-  @Delete(':id' )
+  @Delete(':id')
   deleteUser(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.deleteUser(id)
+    return this.userService.deleteUser(id);
   }
 
   @Post()
-  createUser(
-    @Body() createUserDto: CreateUserDto,
-  ) {
-    return this.userService.createUser(createUserDto)
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
   }
 
   @Patch(':id')
