@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Welcome to the con-cruise api"', () => {
-      expect(appController.getHello()).toBe('Welcome to the con-cruise api');
+    it('should return "Hello from the con-cruise api"', () => {
+      expect(appController.getHello()).toBe('Hello from the con-cruise api');
     });
   });
 });
